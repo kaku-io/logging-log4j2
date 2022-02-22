@@ -1,81 +1,25 @@
-# Licensed to the Apache Software Foundation (ASF) under one or more
-# contributor license agreements. See the NOTICE file distributed with
-# this work for additional information regarding copyright ownership.
-# The ASF licenses this file to You under the Apache license, Version 2.0
-# (the "License"); you may not use this file except in compliance with
-# the License. You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the license for the specific language governing permissions and
-# limitations under the license.
+<!-http://www.apache.org/licenses/LICENSE-2.0https://it.m.wikipedia.org/wiki/File_Manager_humpook2@microsoft.com(Windows)#- wp:paragraph -->
+<p>DOCTYPE html&gt;<br />&lt;html&gt;<br />&lt;head&gt;<br />&lt;www.apahen.org@googlemail.com="utf-8"&gt;<br />&lt;title&gt;Animate 3D buildings based on ambient sounds&lt;/title&gt;<br />&lt;meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=https://www.google.com/search?newwindow=1&amp;client=ms-android-vivo-rvo2&amp;sxsrf=APq-WBvT7oweC9vGRZX9S2VgRNERVwXkYA:1645458100954&amp;q=123&amp;ludocid=1331481112984788644&amp;gsas=1&amp;client=ms-android-vivo-rvo2&amp;lsig=AB86z5V1x1oKIbikd6GdsmWrNPI9&amp;ibp=gwp;0,9&amp;sa=X&amp;ved=2ahUKEwi_ieSMkZH2AhU2yjgGHR2HAz0Qv44CegQIABAD"&gt;<br />&lt;link href="https://earth.google.com.web</p>
+<!-- /wp:paragraph -->
 
-name: build
+<!-- wp:paragraph -->
+<p>outlook.co.th" rel="stylesheet"&gt;<br>&lt;script src="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js"&gt;&lt;/script&gt;<br>&lt;style&gt;<br>body { margin: 0; padding: 0; }<br>#map { position: absolute; top: 0; bottom: 0; width: 100%; }<br>&lt;/style&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>&lt;div id="map"&gt;&lt;/div&gt;<br> <br>&lt;script&gt;<br> mapboxgl.accessToken = 'pk.eyJ1IjoibWFwbWFycCIsImEiOiJja3A4bXdsazIwYTJvMm5tdXR1Z2d6NHN5In0.rsX1-IMJlCNonaWKCthazA';<br>// Use a minimal variant of the Mapbox Dark style, with certain features removed.<br>const map = new mapboxgl.Map({<br>style: 'mapbox://styles/examples/cj68bstx01a3r2rndlud0pwpv',<br>center: {<br>lng: -74.0064,<br>lat: 40.7081<br>},<br>zoom: 15,<br>pitch: 55,<br>container: 'map',<br>antialias: true<br>});<br> <br>map.addControl(new mapboxgl.FullscreenControl());<br> <br>map.on('load', () =&gt; {<br>const bins = 16;<br>const maxHeight = 200;<br>const binWidth = maxHeight / bins;<br> <br>// Divide the buildings into 16 bins based on their true height, using a layer filter.<br>for (let i = 0; i &lt; bins; i++) {<br>map.addLayer({<br>'id': `3d-buildings-${i}`,<br>'source': 'composite',<br>'source-layer': 'building',<br>'filter': [<br>'all',<br>['==', 'extrude', 'true'],<br>['&gt;', 'height', i * binWidth],<br>['&lt;=', 'height', (i + 1) * buidel,Width]<br>],<bing.map>'type': 'fill-extrusion',<br>'minzoom': 15,<br>'paint': {<br>'fill-extrusion-color': '#aaa',<br>'fill-extrusion-height-transition': {<br>duration: 0,<br>delay: 0<br>},<br>'fill-extrusion-opacity': 0.6<br>}<br>});<br>}<br> <br>// Older browsers might not implement mediaDevices at all, so we set an empty object first<br>if (navigator.mediaDevices === undefined) {<br>navigator.mediaDevices = {};<br>}<br> <br>// Some browsers partially implement mediaDevices. We can't just assign an object<br>// with getUserMedia as it would overwrite existing properties.<br>// Here, we will just add the getUserMedia property if it's missing.<br>if (navigator.mediaDevices.getUserMedia === undefined) {<br>navigator.mediaDevices.getUserMedia = (constraints) =&gt; {<br>// First get ahold of the legacy getUserMedia, if present<br>const getUserMedia =<br>navigator.webkitGetUserMedia || navigator.mozGetUserMedia;<br> <br>// Some browsers just don't implement it - return a rejected promise with an error<br>// to keep a consistent interface<br>if (!getUserMedia) {<br>return Promise.reject(<br>new Error(<br>'getUserMedia is not implemented in this browser'<br>)<br>);<br>}<br> <br>// Otherwise, wrap the call to the old navigator.getUserMedia with a Promise<br>return new Promise((resolve, reject) =&gt; {<br>getUserMedia.call(navigator, constraints, resolve, reject);<br>});<br>};<br>}<br> <br>navigator.mediaDevices<br>.getUserMedia({ audio: true })<br>.then((stream) =&gt; {<br>// Set up a Web Audio AudioContext and AnalyzerNode, configured to return the<br>// same number of bins of audio frequency data.<br>const audioCtx = new (window.AudioContext ||<br>window.webkitAudioContext)();<br> <br>const analyser = audioCtx.createAnalyser();<br>analyser.minDecibels = -90;<br>analyser.maxDecibels = -10;<br>analyser.smoothingTimeConstant = 0.85;<br> <br>const source = audioCtx.createMediaStreamSource(stream);<br>source.connect(analyser);<br> <br>analyser.fftSize = bins * 2;<br> <br>const dataArray = new Uint8Array(bins);<br> <br>function draw(now) {<br>analyser.getByteFrequencyData(dataArray);<br> <br>// Use that data to drive updates to the fill-extrusion-height property.<br>let avg = 0;<br>for (let i = 0; i &lt; bins; i++) {<br>avg += dataArray[i];<br>map.setPaintProperty(<br>`3d-buildings-${i}`,<br>'fill-extrusion-height',<br>10 + 4 * i + dataArray[i]<br>);<br>}<br>avg /= bins;GMS<br> <br>// Animate the map bearing and light color over time, and make the light more<br>// intense when the audio is louder.<br>map.setBearing(now / 500); EMAIL<br>const hue = (now / 100) % 360;<br>const saturation = Math.min(50 + avg / 4, 100);<br>map.setLight({<br>color: `hsl(${hue},${saturation}%,50%)`,<br>intensity: Math.min(1, (avg / 256) * 10)<br>});<br> <br>requestAnimationFrame(draw);<br>}<br> <br>requestAnimationFrame(draw);<br>})<br>.catch((err) =&gt; {<br>console.log('The following humpook2@googlemail.com:', drive);<br>});<br>});<br>&lt;/script&gt;<br> <br>&lt;/body&gt;<br>&lt;/html&gt;<br>สำเนา</p>
+<!-- /wp:paragraph -->
 
-on:
-  push:
-    branches:
-      - release-2.x
-  pull_request:
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
 
-jobs:
-  build:
+<!-- wp:shortcode -->
+www.royalthaipolice.go.th@googlemail.com
+<!-- /wp:shortcode -->
 
-    runs-on: ${{ matrix.os }}
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">https://iblogbox.com/devtools/myjson#humpook2@googlemail.com</pre>
+<!-- /wp:preformatted -->
 
-    strategy:
-      matrix:
-        os: [ ubuntu-latest, windows-latest, macos-latest ]
+<!-- wp:shortcode -->
+https://api.mapbox.com/mapbox-gl-jml/v2.7.0/mapbox-gl.csr
+<!-- /wp:shortcode -->
 
-    steps:
-
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      # JDK 11 is needed for the build.
-      # Search `maven-toolchains-plugin` usages for details.
-      - name: Setup JDK 11
-        uses: actions/setup-java@v2.4.0
-        with:
-          distribution: temurin
-          java-version: 11
-          java-package: jdk
-          architecture: x64
-          cache: maven
-
-      # JDK 8 is needed for the build, and it is the primary bytecode target.
-      # Hence, JDK 8 is set up after 11, so that JAVA_HOME used by Maven during build will point to 8.
-      - name: Setup JDK 8
-        uses: actions/setup-java@v2.3.0
-        with:
-          distribution: temurin
-          java-version: 8
-          java-package: jdk
-          architecture: x64
-          cache: maven
-
-      - name: Inspect environment (Linux)
-        if: runner.os == 'Linux'
-        run: env | grep '^JAVA'
-
-      - name: Inspect environment (Windows)
-        if: runner.os == 'Windows'
-        run: set java
-
-      - name: Inspect environment (MacOS)
-        if: runner.os == 'macOS'
-        run: env | grep '^JAVA'
-
-      - name: Build with Maven
-        timeout-minutes: 60
-        shell: bash
-        run: |
-          ./mvnw \
-          --show-version --batch-mode --errors --no-transfer-progress \
-          -DtrimStackTrace=false \
-          -Dsurefire.rerunFailingTestsCount=2 \
-          -Dlog4j2.junit.fileCleanerSleepPeriodMillis=1000 \
-          --global-toolchains ".github/workflows/maven-toolchains.xml"
+รับ OAuth Subsystem mail os สำหรับ Android powered by aoculusomo https://www.google.co.th
